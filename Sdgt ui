@@ -1,0 +1,308 @@
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SDGT_Elite_V47"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.DisplayOrder = 999999999
+ScreenGui.Parent = PlayerGui
+
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 0
+Blur.Enabled = true
+Blur.Parent = Lighting
+
+local UI_WIDTH, UI_HEIGHT, BAR_HEIGHT = 70, 160, 18
+local TARGET_GREEN = Color3.fromRGB(0, 255, 120)
+
+local FeatureStates, CategoryStates, ActiveSubUIs, SubUIFrames = {}, {}, {}, {}
+local UIStrokes, AllButtons, AllTitles = {}, {}, {}
+local CurrentTheme = "Dark"
+local ForcedTextColor = nil
+local UseRainbowTitle = false
+local LockSubUIs = true
+local ShowStatus = true
+
+local StatusPanel = Instance.new("Frame")
+StatusPanel.Size, StatusPanel.Position, StatusPanel.AnchorPoint = UDim2.new(0, 150, 0, 0), UDim2.new(1, -5, 0, 5), Vector2.new(1, 0)
+StatusPanel.BackgroundTransparency, StatusPanel.Parent = 1, ScreenGui
+local StatusList = Instance.new("UIListLayout")
+StatusList.Parent, StatusList.HorizontalAlignment, StatusList.SortOrder, StatusList.Padding = StatusPanel, Enum.HorizontalAlignment.Right, Enum.SortOrder.LayoutOrder, UDim.new(0, 2)
+
+local function getThemeTextColor()
+    if ForcedTextColor then return ForcedTextColor end
+    return (CurrentTheme == "Light" or CurrentTheme == "Glass") and Color3.fromRGB(20, 20, 20) or Color3.fromRGB(255, 255, 255)
+end
+
+local function applyThemeColors(frame, isTitle)
+    if CurrentTheme == "Dark" then 
+        frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        if not isTitle then frame.BackgroundTransparency = 0.5 end
+    elseif CurrentTheme == "Glass" then 
+        frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        if not isTitle then frame.BackgroundTransparency = 0.8 end
+    elseif CurrentTheme == "Neon" then 
+        frame.BackgroundColor3 = Color3.fromRGB(20, 0, 40)
+        if not isTitle then frame.BackgroundTransparency = 0.3 end
+    elseif CurrentTheme == "Light" then 
+        frame.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+        if not isTitle then frame.BackgroundTransparency = 0.05 end 
+    end
+end
+
+local function updateStatusPanel()
+    for _, child in ipairs(StatusPanel:GetChildren()) do if child:IsA("TextLabel") then child:Destroy() end end
+    if not ShowStatus then return end
+    local activeNames = {}
+    for name, state in pairs(FeatureStates) do if state then table.insert(activeNames, name) end end
+    table.sort(activeNames, function(a, b) return #a > #b end)
+    local txtCol = getThemeTextColor()
+    for i, name in ipairs(activeNames) do
+        local label = Instance.new("TextLabel")
+        label.Size, label.AutomaticSize, label.BackgroundTransparency = UDim2.new(0, 0, 0, 14), Enum.AutomaticSize.X, 0.4
+        label.BackgroundColor3 = (txtCol.R > 0.5) and Color3.new(0,0,0) or Color3.new(1,1,1)
+        label.BorderSizePixel, label.Text = 0, name .. "  "
+        label.Font, label.TextSize, label.TextColor3 = Enum.Font.GothamBold, 10, txtCol
+        label.TextXAlignment, label.LayoutOrder, label.Parent = Enum.TextXAlignment.Right, i, StatusPanel
+        local accent = Instance.new("Frame")
+        accent.Size, accent.Position, accent.BorderSizePixel, accent.BackgroundColor3, accent.Parent = UDim2.new(0, 2, 1, 0), UDim2.new(1, 0, 0, 0), 0, TARGET_GREEN, label
+    end
+end
+
+local function updateAllThemes()
+    local txtCol = getThemeTextColor()
+    applyThemeColors(MainFrame, false)
+    applyThemeColors(MainTitle, true)
+    MainTitle.TextColor3 = txtCol
+    for _, btn in ipairs(AllButtons) do btn.TextColor3 = txtCol end
+    for _, f in pairs(SubUIFrames) do
+        applyThemeColors(f, false)
+        local t = f:FindFirstChildOfClass("TextButton")
+        if t then applyThemeColors(t, true) t.TextColor3 = txtCol end
+    end
+    updateStatusPanel()
+end
+
+local function setupDraggableAndToggle(frame, titleBar, contentFrame, isMain)
+    local dragging, dragStart, startPos, hasMoved = false, nil, nil, false
+    local clickTime
+    local inputConnection
+    
+    titleBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            hasMoved = false
+            dragStart = input.Position
+            startPos = frame.Position
+            clickTime = tick()
+            
+            if inputConnection then inputConnection:Disconnect() end
+            inputConnection = UserInputService.InputChanged:Connect(function(moveInput)
+                if dragging and (moveInput.UserInputType == Enum.UserInputType.MouseMovement or moveInput.UserInputType == Enum.UserInputType.Touch) then
+                    local delta = moveInput.Position - dragStart
+                    if delta.Magnitude > 5 then
+                        if isMain or not LockSubUIs then
+                            hasMoved = true
+                            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            if dragging then
+                dragging = false
+                if inputConnection then inputConnection:Disconnect() inputConnection = nil end
+                if not hasMoved and clickTime and (tick() - clickTime) < 0.5 then
+                    local expanded = frame.Size.Y.Offset > BAR_HEIGHT + 5
+                    local targetH = expanded and BAR_HEIGHT or UI_HEIGHT
+                    TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Size = UDim2.fromOffset(UI_WIDTH, targetH)}):Play()
+                    contentFrame.Visible = not expanded
+                end
+            end
+        end
+    end)
+end
+
+local function createBaseFrame(name)
+    local frame = Instance.new("Frame")
+    frame.Name, frame.Size, frame.BorderSizePixel, frame.Visible, frame.ClipsDescendants = name, UDim2.fromOffset(UI_WIDTH, UI_HEIGHT), 0, false, true
+    applyThemeColors(frame, false)
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness, stroke.ApplyStrokeMode, stroke.Parent = 1, Enum.ApplyStrokeMode.Border, frame
+    table.insert(UIStrokes, stroke)
+    return frame
+end
+
+local function createTitleBar(parent, text)
+    local bar = Instance.new("TextButton")
+    bar.Size, bar.BorderSizePixel, bar.Text = UDim2.new(1, 0, 0, BAR_HEIGHT), 0, text
+    bar.Font, bar.TextSize, bar.TextColor3, bar.Parent = Enum.Font.GothamBold, 8, getThemeTextColor(), parent
+    applyThemeColors(bar, true)
+    table.insert(AllTitles, bar)
+    return bar
+end
+
+local function createFeatureButton(parent, name, isCategory, clickCallback)
+    local btn = Instance.new("TextButton")
+    btn.Size, btn.BackgroundTransparency, btn.Text = UDim2.new(1, 0, 0, BAR_HEIGHT), 1, name
+    btn.Font, btn.TextSize, btn.TextColor3, btn.BorderSizePixel, btn.Parent = Enum.Font.Gotham, 8, getThemeTextColor(), 0, parent
+    table.insert(AllButtons, btn)
+    btn.MouseButton1Click:Connect(function()
+        if isCategory then
+            CategoryStates[name] = not CategoryStates[name]
+            local s = CategoryStates[name]
+            TweenService:Create(btn, TweenInfo.new(0.3), {BackgroundTransparency = s and 0.6 or 1, BackgroundColor3 = s and TARGET_GREEN or Color3.new(0,0,0)}):Play()
+            if clickCallback then clickCallback() end
+        else
+            FeatureStates[name] = not FeatureStates[name]
+            local s = FeatureStates[name]
+            TweenService:Create(btn, TweenInfo.new(0.3), {BackgroundTransparency = s and 0.6 or 1, BackgroundColor3 = s and TARGET_GREEN or Color3.new(0,0,0)}):Play()
+            updateStatusPanel()
+        end
+    end)
+    return btn
+end
+
+MainFrame = createBaseFrame("MainFrame")
+MainFrame.Position, MainFrame.Parent = UDim2.new(0.5, -35, 0.2, 0), ScreenGui
+MainTitle = createTitleBar(MainFrame, "水调歌头")
+local MainContent = Instance.new("ScrollingFrame")
+MainContent.Size, MainContent.Position, MainContent.BackgroundTransparency, MainContent.ScrollBarThickness, MainContent.AutomaticCanvasSize, MainContent.Parent = UDim2.new(1, 0, 1, -BAR_HEIGHT), UDim2.new(0, 0, 0, BAR_HEIGHT), 1, 0, Enum.AutomaticSize.Y, MainFrame
+Instance.new("UIListLayout", MainContent).SortOrder = Enum.SortOrder.LayoutOrder
+setupDraggableAndToggle(MainFrame, MainTitle, MainContent, true)
+
+local function toggleSubUI(name)
+    local target = SubUIFrames[name]
+    if not target then return end
+    local idx = table.find(ActiveSubUIs, target)
+    if idx then table.remove(ActiveSubUIs, idx) target.Visible = false
+    else table.insert(ActiveSubUIs, target) if MainFrame.Visible then target.Visible = true end end
+end
+
+local function createSubWindow(name, items)
+    local sub = createBaseFrame(name.."_Sub")
+    sub.Parent = ScreenGui
+    local subTitle = createTitleBar(sub, name)
+    local subScroll = Instance.new("ScrollingFrame")
+    subScroll.Size, subScroll.Position, subScroll.BackgroundTransparency, subScroll.ScrollBarThickness, subScroll.Parent = UDim2.new(1, 0, 1, -BAR_HEIGHT), UDim2.new(0, 0, 0, BAR_HEIGHT), 1, 0, sub
+    Instance.new("UIListLayout", subScroll).SortOrder = Enum.SortOrder.LayoutOrder
+    for _, v in ipairs(items) do createFeatureButton(subScroll, v, false) end
+    setupDraggableAndToggle(sub, subTitle, subScroll, false)
+    SubUIFrames[name] = sub
+end
+
+local function createSettingSub()
+    local name = "界面设置"
+    local sub = createBaseFrame(name.."_Sub")
+    sub.Parent = ScreenGui
+    local subTitle = createTitleBar(sub, name)
+    local subScroll = Instance.new("ScrollingFrame")
+    subScroll.Size, subScroll.Position, subScroll.BackgroundTransparency, subScroll.ScrollBarThickness, subScroll.Parent = UDim2.new(1, 0, 1, -BAR_HEIGHT), UDim2.new(0, 0, 0, BAR_HEIGHT), 1, 0, sub
+    Instance.new("UIListLayout", subScroll).SortOrder = Enum.SortOrder.LayoutOrder
+    
+    createFeatureButton(subScroll, "显示功能栏", true, function() ShowStatus = not ShowStatus updateStatusPanel() end)
+    createFeatureButton(subScroll, "子UI拖动", true, function() LockSubUIs = not LockSubUIs end)
+    createFeatureButton(subScroll, "文字循环色", true, function() UseRainbowTitle = not UseRainbowTitle updateAllThemes() end)
+    
+    local styleContainer = Instance.new("Frame")
+    styleContainer.Size, styleContainer.BackgroundTransparency, styleContainer.ClipsDescendants, styleContainer.Parent = UDim2.new(1, 0, 0, 0), 1, true, subScroll
+    Instance.new("UIListLayout", styleContainer).SortOrder = Enum.SortOrder.LayoutOrder
+
+    createFeatureButton(subScroll, "界面风格", true, function()
+        local s = CategoryStates["界面风格"]
+        TweenService:Create(styleContainer, TweenInfo.new(0.3), {Size = s and UDim2.new(1, 0, 0, 72) or UDim2.new(1, 0, 0, 0)}):Play()
+    end)
+    styleContainer.LayoutOrder = 99
+    
+    local themes = {["深邃黑"]="Dark", ["冰晶玻"]="Glass", ["霓虹紫"]="Neon", ["极简白"]="Light"}
+    for n, v in pairs(themes) do
+        createFeatureButton(styleContainer, n, true, function()
+            if CategoryStates[n] then 
+                CurrentTheme = v 
+                for k, _ in pairs(themes) do if k ~= n then CategoryStates[k] = false end end
+            else CurrentTheme = "Dark" end
+            updateAllThemes()
+        end)
+    end
+
+    setupDraggableAndToggle(sub, subTitle, subScroll, false)
+    SubUIFrames[name] = sub
+end
+
+RunService.RenderStepped:Connect(function()
+    local color = Color3.fromHSV(tick() % 5 / 5, 0.7, 1)
+    for _, s in ipairs(UIStrokes) do s.Color = color end
+    if UseRainbowTitle then
+        local rainbow = Color3.fromHSV(tick() % 3 / 3, 0.8, 1)
+        for _, t in ipairs(AllTitles) do t.TextColor3 = rainbow end
+    end
+    if MainFrame.Visible then
+        local currentX = 4
+        for _, sub in ipairs(ActiveSubUIs) do
+            sub.Visible = true
+            if LockSubUIs then
+                sub.Position = UDim2.new(MainFrame.Position.X.Scale, MainFrame.Position.X.Offset + UI_WIDTH + currentX, MainFrame.Position.Y.Scale, MainFrame.Position.Y.Offset)
+                currentX = currentX + UI_WIDTH + 4
+            end
+        end
+    else for _, sub in ipairs(ActiveSubUIs) do sub.Visible = false end end
+end)
+
+local MainButton = Instance.new("TextButton")
+MainButton.Parent, MainButton.BackgroundColor3, MainButton.Size, MainButton.Position, MainButton.Text, MainButton.Font, MainButton.TextColor3, MainButton.TextSize = ScreenGui, Color3.new(0.04,0.04,0.04), UDim2.fromOffset(35, 35), UDim2.new(0.05, 0, 0.4, 0), "S", Enum.Font.GothamBold, Color3.new(1,1,1), 16
+local MBStroke = Instance.new("UIStroke")
+MBStroke.Thickness, MBStroke.Color, MBStroke.Parent = 1, Color3.fromRGB(80, 80, 80), MainButton
+
+local function initMainButtonDragging()
+    local bDrag, bMoved = false, false
+    local bS, bPS
+    MainButton.InputBegan:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then bDrag, bMoved, bS, bPS = true, false, i.Position, MainButton.Position end end)
+    UserInputService.InputChanged:Connect(function(i)
+        if bDrag and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+            local d = i.Position - bS
+            if d.Magnitude > 5 then bMoved = true end
+            MainButton.Position = UDim2.new(bPS.X.Scale, bPS.X.Offset + d.X, bPS.Y.Scale, bPS.Y.Offset + d.Y)
+        end
+    end)
+    UserInputService.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            if bDrag then
+                bDrag = false
+                if not bMoved then
+                    MainFrame.Visible = not MainFrame.Visible
+                    TweenService:Create(Blur, TweenInfo.new(0.4), {Size = MainFrame.Visible and 14 or 0}):Play()
+                else
+                    local targetX = (MainButton.AbsolutePosition.X < ScreenGui.AbsoluteSize.X/2) and UDim2.new(0, 5, MainButton.Position.Y.Scale, MainButton.Position.Y.Offset) or UDim2.new(1, -40, MainButton.Position.Y.Scale, MainButton.Position.Y.Offset)
+                    TweenService:Create(MainButton, TweenInfo.new(0.3, Enum.EasingStyle.BackOut), {Position = targetX}):Play()
+                end
+            end
+        end
+    end)
+end
+
+local SubLists = {
+    ["战术攻击"] = {"自瞄锁定", "无后座力", "快速填装", "锁定头部"},
+    ["移动增强"] = {"行走加速", "无限跳跃", "飞行模式", "穿墙行走"},
+    ["视觉透视"] = {"方框透视", "线条指向", "显示名称", "血条透视"},
+    ["玩家设置"] = {"无敌模式", "无限体力", "快速回血", "修改属性"}
+}
+local listOrder = {"战术攻击", "移动增强", "视觉透视", "玩家设置", "界面设置"}
+for _, c in ipairs(listOrder) do
+    if c == "界面设置" then createSettingSub() else createSubWindow(c, SubLists[c]) end
+    createFeatureButton(MainContent, c, true, function() toggleSubUI(c) end)
+end
+
+initMainButtonDragging()
+updateAllThemes()
+
