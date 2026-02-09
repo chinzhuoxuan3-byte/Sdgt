@@ -1,0 +1,138 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ZombieTP_Final"
+if gethui then ScreenGui.Parent = gethui() else ScreenGui.Parent = CoreGui end
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.Position = UDim2.new(0.5, -80, 0.4, 0)
+MainFrame.Size = UDim2.new(0, 160, 0, 100)
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Active = true
+Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 4)
+
+local TopBar = Instance.new("Frame", MainFrame)
+TopBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TopBar.Size = UDim2.new(1, 0, 0, 25)
+Instance.new("UICorner", TopBar).CornerRadius = UDim.new(0, 4)
+
+local Title = Instance.new("TextLabel", TopBar)
+Title.Text = "JTZ 传送脚本"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 11
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Size = UDim2.new(1, -30, 1, 0)
+Title.Position = UDim2.new(0, 8, 0, 0)
+Title.BackgroundTransparency = 1
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+local FoldBtn = Instance.new("TextButton", TopBar)
+FoldBtn.Size = UDim2.new(0, 25, 0, 25)
+FoldBtn.Position = UDim2.new(1, -25, 0, 0)
+FoldBtn.BackgroundTransparency = 1
+FoldBtn.Text = "-"
+FoldBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+FoldBtn.Font = Enum.Font.GothamBold
+FoldBtn.TextSize = 14
+
+local isFolded = false
+FoldBtn.MouseButton1Click:Connect(function()
+    isFolded = not isFolded
+    TweenService:Create(MainFrame, TweenInfo.new(0.3), {Size = isFolded and UDim2.new(0, 160, 0, 25) or UDim2.new(0, 160, 0, 100)}):Play()
+    FoldBtn.Text = isFolded and "+" or "-"
+end)
+
+local Container = Instance.new("Frame", MainFrame)
+Container.BackgroundTransparency = 1
+Container.Position = UDim2.new(0, 0, 0, 28)
+Container.Size = UDim2.new(1, 0, 1, -30)
+
+local function CreateToggle(name, callback)
+    local Frame = Instance.new("Frame", Container)
+    Frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    Frame.Size = UDim2.new(0, 150, 0, 30)
+    Frame.Position = UDim2.new(0.5, -75, 0, 5)
+    Instance.new("UICorner", Frame)
+    
+    local Label = Instance.new("TextLabel", Frame)
+    Label.Text = name
+    Label.Size = UDim2.new(1, 0, 1, 0)
+    Label.Position = UDim2.new(0, 8, 0, 0)
+    Label.BackgroundTransparency = 1
+    Label.TextColor3 = Color3.fromRGB(180, 180, 180)
+    Label.TextSize = 11
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    
+    local Ind = Instance.new("Frame", Frame)
+    Ind.Size = UDim2.new(0, 10, 0, 10)
+    Ind.Position = UDim2.new(1, -18, 0, 10)
+    Ind.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    Instance.new("UICorner", Ind).CornerRadius = UDim.new(1, 0)
+    
+    local on = false
+    local Btn = Instance.new("TextButton", Frame)
+    Btn.Size = UDim2.new(1, 0, 1, 0)
+    Btn.BackgroundTransparency = 1
+    Btn.Text = ""
+    Btn.MouseButton1Click:Connect(function()
+        on = not on
+        Ind.BackgroundColor3 = on and Color3.fromRGB(0, 255, 120) or Color3.fromRGB(60, 60, 60)
+        callback(on)
+    end)
+end
+
+local tpEnabled = false
+local camContainer = workspace:FindFirstChild("Camera")
+
+local function getZombies()
+    local zombies = {}
+    if camContainer then
+        for _, v in pairs(camContainer:GetChildren()) do
+            if v.Name == "m_zombie" and v:FindFirstChild("HumanoidRootPart") then
+                table.insert(zombies, v)
+            end
+        end
+    end
+    return zombies
+end
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if tpEnabled then
+            local lp = Players.LocalPlayer
+            if lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
+                local zombies = getZombies()
+                
+                table.sort(zombies, function(a, b)
+                    local distA = (lp.Character.HumanoidRootPart.Position - a.HumanoidRootPart.Position).Magnitude
+                    local distB = (lp.Character.HumanoidRootPart.Position - b.HumanoidRootPart.Position).Magnitude
+                    return distA < distB
+                end)
+
+                if #zombies > 0 then
+                    local target = zombies[1]
+                    local root = target.HumanoidRootPart
+                    lp.Character.HumanoidRootPart.CFrame = root.CFrame * CFrame.new(0, 0, 3)
+                end
+            end
+        end
+    end
+end)
+
+CreateToggle("自动背刺传送", function(v) tpEnabled = v end)
+
+local dragStart, startPos, dragging
+TopBar.InputBegan:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then dragging = true dragStart = i.Position startPos = MainFrame.Position end end)
+UserInputService.InputChanged:Connect(function(i) if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+    local delta = i.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end end)
+UserInputService.InputEnded:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then dragging = false end end)
+
